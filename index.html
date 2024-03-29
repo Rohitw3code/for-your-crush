@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moon 🌙</title>
+<style>
+    /* Style for the body */
+    body {
+        background-color: #000000; /* Night sky color */
+        color: #fff; /* Text color */
+    }
+
+    /* Style for the image container */
+    #image-container {
+        text-align: center; /* Center align the image */
+        position: relative; /* Relative positioning for absolute positioning of reflection */
+    }
+
+    /* Style for the displayed image */
+    #display-image {
+        max-width: 100%;
+        height: auto;
+        margin-top: 50px;
+        border-radius: 70%; /* Make the image round */
+        overflow: hidden; /* Hide the parts of the image outside the circle */
+        position: relative; /* Relative positioning for absolute positioning of reflection */
+    }
+
+/* Style for the reflection effect */
+#reflection {
+    display: none; /* Initially hidden */
+    position: absolute; /* Absolute positioning to overlay on top of the image */
+    width: 100%; /* Reduced width of the reflection */
+    height: 100%; /* Reduced height of the reflection */
+    background: radial-gradient(circle at 50% 50%, transparent 15%, rgba(255, 0, 128, 0.852) 40%, rgba(128, 0, 64, 0.2) 60%, rgba(128, 0, 64, 0) 80%); /* Dark pink reflection effect */
+    animation: shining 2s infinite; /* Animation */
+    border-radius: 50% / 70% 70% 0 0; /* Make the bottom shape round */
+}
+
+/* Animation for the shining effect */
+    @keyframes shining {
+        0% {
+            transform: scale(1); /* Reduced initial scale */
+        }
+        50% {
+            transform: scale(1.3); /* Normal scale */
+        }
+        100% {
+            transform: scale(1); /* Reduced final scale */
+        }
+    }
+
+    /* Style for the dropdown */
+    #dropdown {
+        display: block;
+        margin: 20px auto; /* Center the dropdown */
+        font-size: 16px; /* Increase the font size */
+        padding: 10px; /* Add padding */
+        border-radius: 5px; /* Rounded corners */
+        border: 1px solid #ccc; /* Add border */
+        background-color: #fff; /* Dropdown background color */
+        color: #000; /* Dropdown text color */
+    }
+
+    /* Style for the play button */
+    #play-button {
+        display: block;
+        margin: 20px auto; /* Center the button */
+        padding: 10px 20px; /* Add padding */
+        border-radius: 5px; /* Rounded corners */
+        border: none; /* Remove border */
+        background-color: #007bff; /* Button background color */
+        color: #fff; /* Button text color */
+        cursor: pointer; /* Show pointer cursor on hover */
+    }
+</style>
+</head>
+<body>
+
+<!-- Audio -->
+<audio id="background-audio" loop>
+    <source src="images/audio.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Image display area -->
+<div id="image-container">
+    <div id="reflection"></div>
+    <img id="display-image" width="256" src="images/A.png" alt="Displayed Image"> <!-- Set default image to A -->
+    <!-- Reflection effect -->
+</div>
+
+<!-- Dropdown menu -->
+<select id="dropdown" onchange="displayImage()">
+    <option value="A">144p</option>
+    <option value="B">240p</option>
+    <option value="C">360p</option>
+    <option value="D">480p</option>
+    <option value="E">720p</option>
+    <option value="F">1080p</option>
+</select>
+
+<!-- Play button -->
+<!-- <button id="play-button" onclick="toggleAudio()">Play Audio</button> -->
+
+<script>
+    var audio = document.getElementById("background-audio");
+    var isAudioPlaying = false;
+
+    // Function to toggle audio playback
+    function toggleAudio() {
+        if (isAudioPlaying) {
+            audio.pause();
+            isAudioPlaying = false;
+            document.getElementById("play-button").textContent = "Play Audio";
+        } else {
+            audio.play();
+            isAudioPlaying = true;
+            document.getElementById("play-button").textContent = "Pause Audio";
+        }
+    }
+
+    // Function to display the corresponding image based on the dropdown selection
+    function displayImage() {
+        var selectedOption = document.getElementById("dropdown").value;
+        var image = document.getElementById("display-image");
+        var reflection = document.getElementById("reflection");
+
+        // Set the image source based on the selected option
+        switch (selectedOption) {
+            case "A":
+                image.src = "images/A.png";
+                reflection.style.display = "none"; // Hide reflection
+                break;
+            case "B":
+                image.src = "images/B.png";
+                reflection.style.display = "none"; // Hide reflection
+                break;
+            case "C":
+                image.src = "images/C.png";
+                reflection.style.display = "none"; // Hide reflection
+                break;
+            case "D":
+                image.src = "images/D.png";
+                reflection.style.display = "none"; // Hide reflection
+                break;
+            case "E":
+                image.src = "images/E.png";
+                reflection.style.display = "none"; // Hide reflection
+                break;
+            case "F":
+                image.src = "images/F.gif";
+                reflection.style.display = "block"; // Show reflection
+                break;
+            default:
+                // If no option is selected or unknown option is selected, clear the image source
+                image.src = "";
+                reflection.style.display = "none"; // Hide reflection
+                break;
+        }
+
+        // Toggle audio playback based on image change
+        if (!isAudioPlaying) {
+            toggleAudio();
+        }
+    }
+</script>
+
+</body>
+</html>
